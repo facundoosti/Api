@@ -1,0 +1,14 @@
+development:
+  adapter: sqlite3
+  database: db/organizacion_x.sqlite3
+
+test:
+  adapter: sqlite3
+  database: db/organizacion_x_test.sqlite3
+
+production:
+  adapter: mysql2
+  host: localhost #addr:181.166.1.114
+  username: root
+  password: 'facuy..'
+  database: organizacion_x_production
