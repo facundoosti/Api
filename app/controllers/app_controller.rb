@@ -74,8 +74,8 @@ class App < Sinatra::Base
         halt 404
     end
 
-    date = (Time.new date.to_s).utc.iso8601
-    limit =(Time.new limit.to_s).utc.iso8601
+    date = (Time.parse date.to_s).utc.iso8601
+    limit =(Time.parse limit.to_s).utc.iso8601
     
     hash = { availability: [], links: [] }
 
