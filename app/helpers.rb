@@ -15,7 +15,7 @@ module Helpers
   end
   
   def links_to_book id,resource_id
-    vec = [{rel:'self', url:"#{host}/resources/#{resource_id}/bookings/#{id}"}]
+    vec = [{rel:'self', uri:"#{host}/resources/#{resource_id}/bookings/#{id}"}]
     vec << {rel:'resource', uri:"#{host}/resources/#{resource_id}"}
     vec << links('accept',"/resources/#{resource_id}/bookings/#{id}", 'PUT')
     vec << links('reject',"/resources/#{resource_id}/bookings/#{id}",'DELETE')

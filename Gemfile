@@ -5,7 +5,6 @@ gem 'sinatra-contrib', require: 'sinatra/reloader'
 gem 'micro_migrations', github: 'svenfuchs/micro_migrations'
 gem 'mysql2'
 gem 'activerecord', require: 'active_record'
-gem 'rb-readline', '~> 0.4.2'
 gem 'enumerize', require: 'enumerize'
 
 group :test do
@@ -17,7 +16,9 @@ group :test do
 end
 
 group :development do
+	gem 'pry'
   gem 'tux'
+  gem 'rb-readline', '~> 0.5.1'
 end
 group :development, :test do
   gem 'sqlite3', require: 'sqlite3'

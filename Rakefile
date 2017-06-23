@@ -19,3 +19,14 @@ task :console do
   ARGV.clear
   IRB.start 
 end
+
+desc 'Restartea la base de datos'
+namespace :db do
+	task :restart do
+	  ENV['RACK_ENV'] ||= 'development'
+	  Rake::Task["db:drop"].invoke 
+	  Rake::Task["db:create"].invoke 
+	  Rake::Task["db:migrate"].invoke 
+	  Rake::Task["db:seed"].invoke 
+	end
+end	

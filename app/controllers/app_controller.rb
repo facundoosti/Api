@@ -126,6 +126,9 @@ class App < Sinatra::Base
     halt 409 unless resource.occuped_block?(from, to)
 
     booking=resource.bookings.create start: from.iso8601, end: to.iso8601
+
+    booking.update user: params[:user] if params[:user]
+      
     book = JSON.parse(booking.to_json(only: [:start, :end, :status], methods: :links))
     book['links'] = links_to_book(book['links']['id'].to_s, book['links']['resource_id'].to_s)
     book['links'].delete_if {|hash| hash[:rel] == 'resource'}
@@ -166,11 +169,11 @@ class App < Sinatra::Base
   # mostrar reserva
   get '/resources/:id_resource/bookings/:id_booking' do
     begin
-      book = JSON.parse(Resource.find(params[:id_resource]).bookings.find(params[:id_booking]).to_json(only: [:start, :end, :status], methods: :links))
+      book = JSON.parse(Resource.find(params[:id_resource]).bookings.find(params[:id_booking]).to_json(only: [:start, :end, :user, :status], methods: :links))
     rescue ActiveRecord::RecordNotFound => e
       halt 404
     end
     book['links'] = links_to_book(book['links']['id'].to_s, book['links']['resource_id'].to_s)
-    JSON.generate(book.replace(from: book['start'], to: book['end'], status: book['status'], links: book['links']))
+    JSON.generate(book.replace(from: book['start'], to: book['end'], status: book['status'], user: book['user'], links: book['links']))
   end
 end
